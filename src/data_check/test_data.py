@@ -3,6 +3,7 @@ import numpy as np
 import scipy.stats
 
 
+    
 def test_column_names(data):
 
     expected_colums = [
@@ -63,3 +64,12 @@ def test_similar_neigh_distrib(data: pd.DataFrame, ref_data: pd.DataFrame, kl_th
 ########################################################
 # Implement here test_row_count and test_price_range   #
 ########################################################
+
+
+def test_row_count(data):
+        assert 15000 < data.shape[0] < 1000000
+
+def test_price_range(data, min_price, max_price):
+    mask = data['price'].between(min_price, max_price, inclusive="both")
+    assert mask.all()
+

@@ -1,0 +1,59 @@
+def go(args):
+    # 1) Load the datasets
+    data     = pd.read_csv(args.csv)
+    ref_data = pd.read_csv(args.ref)
+
+    # 2) Run tests 
+    test_column_names(data)
+    test_neighborhood_names(data)
+    test_proper_boundaries(data)
+    test_row_count(data)
+    test_price_range(data, args.min_price, args.max_price)
+    
+    test_similar_neigh_distrib(data, ref_data, float(args.kl_threshold))
+
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="A very basic data test set")
+  
+    parser.add_argument(
+        "--csv", 
+        type = str ,
+        help = "Input CSV File To Be Tested",
+        required = True
+    )
+
+    parser.add_argument(
+        "--ref", 
+        type = str ,
+        help = "Reference CSV File to compare the new CSV to",
+        required = True
+    )
+
+    parser.add_argument(
+        "--kl_threshold", 
+        type = str,
+        help = "Threshold for the KL divergence test on the neighborhood group column",
+        required = True
+    )
+
+
+    parser.add_argument(
+        "--min_price", 
+        type = float ,
+        help = "Minimum accepted price",
+        required = True
+    )
+
+    parser.add_argument(
+        "--max_price",
+        type = float ,
+        help = "Maximum accepted price",
+        required = True
+    )
+
+
+    args = parser.parse_args()
+
+    go(args)
