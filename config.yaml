@@ -21,6 +21,8 @@ modeling:
   # Fraction of data to use for test (the remaining will be used for train and validation)
   trainval_artifact: "trainval_data.csv:latest"
   output_artifact: "random_forest_export"
+  mlflow_model: "random_forest_export:prod"
+  test_dataset: "test_data.csv:latest"
   test_size: 0.2
   # Fraction of remaining data to use for validation
   val_size: 0.2
@@ -34,8 +36,8 @@ modeling:
   # NOTE: you can put here any parameter that is accepted by the constructor of
   # RandomForestRegressor. This is a subsample, but more could be added:
   random_forest:
-    n_estimators: 100
-    max_depth: 15
+    n_estimators: 200
+    max_depth: 50
     min_samples_split: 4
     min_samples_leaf: 3
     # Here -1 means all available cores
