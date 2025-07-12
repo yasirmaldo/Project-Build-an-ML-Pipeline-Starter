@@ -30,8 +30,11 @@ def go(args):
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
 
+    # I don't remember adding these lines? Any how the project instructions say to add them and push the changes as release 1.0.1
+    # take these comments as me adding them 
     idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
     df = df[idx].copy()
+    
     # Save the cleaned file
     df.to_csv('clean_sample.csv',index=False)
 
